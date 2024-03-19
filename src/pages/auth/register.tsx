@@ -89,8 +89,6 @@ const Register = () => {
 
   return (
     <>
-      <Header userStatus={false} />
-
       <div className=" flex  items-center justify-center w-full  h-screen">
         <div className=" bg-gray-200 rounded-3xl h-[65%] w-[25%] flex flex-col items-center justify-start ">
           <span className=" font-bold text-xl h-[25%] flex justify-center items-center">

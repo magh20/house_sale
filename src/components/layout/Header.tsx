@@ -11,7 +11,7 @@ const Header = ({ userStatus }) => {
   }, [userStatus]);
 
   return (
-    <header className=" w-full flex justify-between p-5 border-b border-gray-200 fixed z-50">
+    <header className=" w-full flex justify-between p-5 border-b border-gray-200 fixed z-50 bg-white">
       {isLogin ? (
         <>
           <span className=" p-2 rounded-lg border border-gray-400 flex justify-center items-center">

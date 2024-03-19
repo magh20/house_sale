@@ -32,3 +32,16 @@ export const getPosts = async () => {
     return console.log(e);
   }
 };
+
+export const postRegister = async (arg: any) => {
+  try {
+    const response: any = await header(`http://localhost:3000`).post(
+      `/posts`,
+      arg
+    );
+
+    return response;
+  } catch (e) {
+    return console.log(e);
+  }
+};

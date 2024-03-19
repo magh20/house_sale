@@ -7,12 +7,25 @@ import Register from "./pages/auth/register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreatePost from "./pages/createPost";
+import Header from "./components/layout/Header";
+import { useContext } from "react";
+import { myContext } from "./context/context";
+
+interface MyContextValue {
+  access: boolean;
+  userDetail: any;
+}
 
 function App() {
+  const { access } = useContext(myContext) as MyContextValue;
+
   return (
     <>
       <BrowserRouter>
         <ToastContainer />
+
+        <Header userStatus={access} />
+
         <Routes>
           <Route path="/" element={<MainPage />} />
 
