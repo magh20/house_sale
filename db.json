@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "password": "password1",
+      "phoneNumber": "09121111111"
+    },
+    {
+      "id": "1394",
+      "phoneNumber": 9191111111,
+      "username": "mmd",
+      "password": "1234"
+    },
+    {
+      "id": "2c90",
+      "phoneNumber": 91922222222,
+      "username": "mmd",
+      "password": "hg"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "address": "Tehran",
+      "description": "Content of post 1",
+      "phoneNumber": "09121111111"
+    }
+  ]
+}

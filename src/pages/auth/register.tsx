@@ -4,21 +4,34 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Header from "../../components/layout/Header";
+import { toast } from "react-toastify";
+import { myContext } from "../../context/context";
+import { userLogin, userRegister } from "../../services/auth";
 
 interface FormData {
   name: string;
   username: string;
   password: string;
+  phoneNumber: number;
+}
+
+interface MyContextValue {
+  setAccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserDetail: React.Dispatch<React.SetStateAction<object>>;
 }
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
 
+  const { setAccess, setUserDetail } = useContext(myContext) as MyContextValue;
+
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
-    name: yup.string().required("please enter your name"),
+    phoneNumber: yup.number().required("please enter your phone number"),
     username: yup
       .string()
       .required("please enter your username")
@@ -40,19 +53,44 @@ const Register = () => {
     setLoading(true);
 
     const obj = {
-      name: data.name,
+      phoneNumber: data.phoneNumber,
       username: data.username,
       password: data.password,
     };
 
-    const response = obj;
+    const objCheck = {
+      phoneNumber: data.phoneNumber,
+    };
 
-    setLoading(false);
+    const res: any = await userLogin(objCheck);
+
+    if (res.data?.length != 0) {
+      toast.error("!این کاربر وجود دارد");
+
+      setLoading(false);
+    } else {
+      const response: any = await userRegister(obj);
+
+      setLoading(false);
+
+      if (response) {
+        toast.success(".خوش آمدید");
+        navigate("/");
+
+        setAccess(true);
+        localStorage.setItem("access", JSON.parse("true"));
+
+        setUserDetail(response.data);
+      } else {
+        toast.error("مشکلی پیش آمده است! لطفا دوباره تلاش کنید.");
+      }
+    }
   };
 
   return (
     <>
-      <Header />
+      <Header userStatus={false} />
+
       <div className=" flex  items-center justify-center w-full  h-screen">
         <div className=" bg-gray-200 rounded-3xl h-[65%] w-[25%] flex flex-col items-center justify-start ">
           <span className=" font-bold text-xl h-[25%] flex justify-center items-center">
@@ -65,11 +103,11 @@ const Register = () => {
             <input
               type="text"
               className="bg-white opacity-100 border border-1 border-rel-blue  w-[90%] h-[60px] max-sm:w-[85%] max-sm:h-[40px] mb-1 focus:outline-none pl-3 rounded-lg "
-              placeholder="name"
-              {...register("name")}
+              placeholder="Phone Number"
+              {...register("phoneNumber")}
             />
             <p className=" text-xs mb-1 font-dana text-red-700 z-50">
-              {errors.name?.message}
+              {errors.phoneNumber?.message}
             </p>
 
             <input

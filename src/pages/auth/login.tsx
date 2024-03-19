@@ -4,27 +4,32 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/layout/Header";
+import { userLogin } from "../../services/auth";
+import { toast } from "react-toastify";
+import { myContext } from "../../context/context";
 
 interface FormData {
   username: string;
   password: string;
 }
 
+interface MyContextValue {
+  setAccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserDetail: React.Dispatch<React.SetStateAction<object>>;
+}
+
 const Login = () => {
   const [loading, setLoading] = useState(false);
 
-  const schema = yup.object().shape({
-    username: yup
-      .string()
-      .required("please enter your username")
-      .matches(
-        /^[\u0621-\u0628\u062A-\u063A\u0641-\u0642\u0644-\u0648\u064E-\u0651\u0655\u067E\u0686\u0698\u0020\u2000-\u200F\u2028-\u202F\u06A9\u06AF\u06BE\u06CC\u0629\u0643\u0649-\u064B\u064D\u06D5\sa-zA-Z]+$/,
-        "Username is incorrect!"
-      ),
+  const { setAccess, setUserDetail } = useContext(myContext) as MyContextValue;
 
+  const navigate = useNavigate();
+
+  const schema = yup.object().shape({
+    username: yup.string().required("please enter your username"),
     password: yup.string().required("password is required!"),
     // .min(8, "Password must be at least 8 characters!")
   });
@@ -35,7 +40,7 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = (data: FormData) => {
     setLoading(true);
 
     const obj = {
@@ -43,14 +48,26 @@ const Login = () => {
       password: data.password,
     };
 
-    const response = obj;
+    const response: any = userLogin(obj);
 
     setLoading(false);
+
+    if (response.data?.length != 0) {
+      toast.success("خوش آمدید.");
+      navigate("/");
+
+      setAccess(true);
+      localStorage.setItem("access", JSON.parse("true"));
+
+      setUserDetail(response.data[0]);
+    } else {
+      toast.error("کاربری با این مشصات وجود ندارد!");
+    }
   };
 
   return (
     <>
-      <Header />
+      <Header userStatus={false} />
       <div className=" flex  items-center justify-center w-full  h-screen">
         <div className=" bg-gray-200 rounded-3xl h-[45%] w-[25%] flex flex-col items-center justify-start ">
           <span className=" font-bold text-xl h-[25%] flex justify-center items-center">

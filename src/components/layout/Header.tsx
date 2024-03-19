@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ userStatus }) => {
   const [isLogin, setIsLogin] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLogin(false);
-  }, []);
+    setIsLogin(userStatus);
+  }, [userStatus]);
 
   return (
     <header className=" w-full flex justify-between p-5 border-b border-gray-200 fixed z-50">
