@@ -47,3 +47,28 @@ export const postRegister = async (arg: any) => {
     return console.log(e);
   }
 };
+
+export const postEdit = async (id: string, arg: any) => {
+  try {
+    const response: any = await header(`http://localhost:3000`).put(
+      `/posts/${id}`,
+      arg
+    );
+
+    return response;
+  } catch (e) {
+    return console.log(e);
+  }
+};
+
+export const postDelete = async (id: string) => {
+  try {
+    const response: any = await header(`http://localhost:3000`).delete(
+      `/posts/${id}`
+    );
+
+    return response;
+  } catch (e) {
+    return console.log(e);
+  }
+};

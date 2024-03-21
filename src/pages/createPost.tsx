@@ -24,13 +24,12 @@ const CreatePost = () => {
 
   const postCreate = () => {
     setLoading(true);
-    console.log(userDetail);
 
-    if (address && des && position && userDetail.phoneNumber) {
+    if (address && des && position && userDetail?.phoneNumber) {
       const obj = {
         address,
         coordinates: position,
-        phoneNumber: userDetail.phoneNumber,
+        phoneNumber: userDetail?.phoneNumber,
         description: des,
       };
 
@@ -76,13 +75,18 @@ const CreatePost = () => {
           <article className=" w-full flex flex-col  items-end">
             <span className="w-full flex justify-end mb-3"> : مختصات محل</span>
             <div className=" w-full">
-              <LeafletMap setPosition={setPosition} position={position} />
+              <LeafletMap
+                setPosition={setPosition}
+                position={position}
+                canDrag={true}
+              />
             </div>
           </article>
 
           <article className=" w-full flex justify-center items-center mt-2">
             <button
               className=" rounded-lg bg-green-400 justify-center items-center flex py-1 px-5"
+              disabled={loading}
               onClick={() => postCreate()}
             >
               ثبت آگهی

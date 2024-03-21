@@ -5,17 +5,15 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import Header from "../../components/layout/Header";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { myContext } from "../../context/context";
 import { userLogin, userRegister } from "../../services/auth";
 
 interface FormData {
-  name: string;
   username: string;
   password: string;
-  phoneNumber: number;
+  phoneNumber: string;
 }
 
 interface MyContextValue {

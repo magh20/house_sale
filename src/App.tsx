@@ -10,10 +10,10 @@ import CreatePost from "./pages/createPost";
 import Header from "./components/layout/Header";
 import { useContext } from "react";
 import { myContext } from "./context/context";
+import PostDetail from "./pages/postDetail";
 
 interface MyContextValue {
   access: boolean;
-  userDetail: any;
 }
 
 function App() {
@@ -34,6 +34,8 @@ function App() {
           <Route path="/auth/register" element={<Register />} />
 
           <Route path="/createPost" element={<CreatePost />} />
+
+          <Route path="/postDetail/:postId" element={<PostDetail />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 type contextType = {
   access?: boolean | string;
   setAccess?: React.Dispatch<React.SetStateAction<contextType["access"]>>;
-  userDetail?: object;
+  userDetail?: any;
   setUserDetail?: React.Dispatch<
     React.SetStateAction<contextType["userDetail"]>
   >;
@@ -12,9 +12,19 @@ type contextType = {
 export const myContext = createContext<contextType | null>(null);
 
 const Context = ({ children }: React.PropsWithChildren<object>) => {
-  const [access, setAccess] = useState(false);
-  const [userDetail, setUserDetail] = useState({});
+  const [access, setAccess] = useState(
+    localStorage.getItem("access") ? localStorage.getItem("access") : false
+  );
+  const [userDetail, setuserDetail] = useState(
+    localStorage.getItem("userDetail")
+      ? localStorage.getItem("userDetail")
+      : "{}"
+  );
 
+  const setUserDetail = (item: any) => {
+    setuserDetail(item);
+    localStorage.setItem("userDetail", JSON.stringify(item));
+  };
   return (
     <myContext.Provider
       value={{

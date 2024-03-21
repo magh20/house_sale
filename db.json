@@ -8,28 +8,20 @@
     },
     {
       "id": "70cd",
-      "phoneNumber": "9192222222",
+      "phoneNumber": "09192222222",
       "username": "magh",
       "password": "4321"
     }
   ],
   "posts": [
     {
-      "id": "1",
       "address": "Tehran",
       "description": "Content of post 1",
-      "phoneNumber": "09121111111",
-      "coordinates": [12.32, 23.43]
-    },
-    {
-      "id": "4986",
-      "address": "تهرانسر",
       "coordinates": {
-        "lat": 35.698571062054015,
-        "lng": 51.41172526420877
+        "lat": 35.73703779932528,
+        "lng": 51.48641143250004
       },
-      "phoneNumber": "9192222222",
-      "description": "لاکچری"
+      "id": "1"
     },
     {
       "id": "1be2",
@@ -38,7 +30,7 @@
         "lat": 35.72421761691415,
         "lng": 51.51231655287533
       },
-      "phoneNumber": "9192222222",
+      "phoneNumber": "09192222222",
       "description": "..."
     },
     {
@@ -58,7 +50,7 @@
         "lat": 35.72421761691415,
         "lng": 51.51231655287533
       },
-      "phoneNumber": "9192222222",
+      "phoneNumber": "09192222222",
       "description": "..."
     },
     {

@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const PostCart = ({ item }: any) => {
+  const navigate = useNavigate();
+
   return (
-    <article className=" mt-5 w-full lg:w-[23%] h-[150px] rounded-2xl flex flex-col justify-center items-center border border-gray-400 p-3  shadow-md shadow-slate-500">
+    <article
+      className=" mt-5 w-full lg:w-[23%] h-[150px] rounded-2xl flex flex-col justify-center items-center border border-gray-400 p-3  shadow-md shadow-slate-500 cursor-pointer"
+      onClick={() => navigate(`/postDetail/${item.id}`)}
+    >
       <img
         src="/images/defaultCamera.svg"
         alt="default camera"
