@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-## use Tailwind & Axios & React-hook-form & yup & json-server 0.17.4 & json-server-auth & leaflet & react-router-dom & React-toastify
+## used "Tailwind & Axios & React-hook-form & yup & json-server 0.17.4 & json-server-auth & leaflet & react-router-dom & React-toastify" in this project
 
 ### run this program first with 
 ```js
