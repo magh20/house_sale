@@ -11,7 +11,7 @@ const MainPage = () => {
 
   const getData = async () => {
     const obj = {
-      _per_page: 12,
+      _limit: 12,
       _page: page,
     };
 
@@ -19,7 +19,7 @@ const MainPage = () => {
 
     if (response.data?.length != 0) {
       setData(response.data);
-      setTotalPage(response.data.pages);
+      setTotalPage(Math.ceil(parseInt(response.headers["x-total-count"]) / 12));
     } else {
       toast.error("!پستی وجود ندارد");
     }
