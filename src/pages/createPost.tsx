@@ -24,8 +24,9 @@ const CreatePost = () => {
 
   const postCreate = () => {
     setLoading(true);
+    console.log(userDetail);
 
-    if (address && des && position) {
+    if (address && des && position && userDetail.phoneNumber) {
       const obj = {
         address,
         coordinates: position,
@@ -82,7 +83,6 @@ const CreatePost = () => {
           <article className=" w-full flex justify-center items-center mt-2">
             <button
               className=" rounded-lg bg-green-400 justify-center items-center flex py-1 px-5"
-              disabled={loading}
               onClick={() => postCreate()}
             >
               ثبت آگهی

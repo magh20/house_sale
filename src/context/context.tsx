@@ -12,9 +12,7 @@ type contextType = {
 export const myContext = createContext<contextType | null>(null);
 
 const Context = ({ children }: React.PropsWithChildren<object>) => {
-  const [access, setAccess] = useState(
-    localStorage.getItem("access") ? localStorage.getItem("access") : false
-  );
+  const [access, setAccess] = useState(false);
   const [userDetail, setUserDetail] = useState({});
 
   return (

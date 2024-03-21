@@ -31,7 +31,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
-    phoneNumber: yup.number().required("please enter your phone number"),
+    phoneNumber: yup
+      .string()
+      .min(11)
+      .required("please enter your phone number"),
     username: yup
       .string()
       .required("please enter your username")
@@ -53,13 +56,13 @@ const Register = () => {
     setLoading(true);
 
     const obj = {
-      phoneNumber: data.phoneNumber,
+      phoneNumber: data.phoneNumber.toString(),
       username: data.username,
       password: data.password,
     };
 
     const objCheck = {
-      phoneNumber: data.phoneNumber,
+      phoneNumber: data.phoneNumber.toString(),
     };
 
     const res: any = await userLogin(objCheck);
@@ -75,12 +78,12 @@ const Register = () => {
 
       if (response) {
         toast.success(".خوش آمدید");
-        navigate("/");
 
         setAccess(true);
         localStorage.setItem("access", JSON.parse("true"));
-
         setUserDetail(response.data);
+
+        navigate("/");
       } else {
         toast.error("مشکلی پیش آمده است! لطفا دوباره تلاش کنید.");
       }

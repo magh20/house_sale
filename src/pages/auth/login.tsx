@@ -40,7 +40,7 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
 
     const obj = {
@@ -48,20 +48,20 @@ const Login = () => {
       password: data.password,
     };
 
-    const response: any = userLogin(obj);
+    const response: any = await userLogin(obj);
 
     setLoading(false);
 
-    if (response.data?.length != 0) {
+    if (response.data?.length !== 0) {
       toast.success("خوش آمدید.");
-      navigate("/");
 
       setAccess(true);
       localStorage.setItem("access", JSON.parse("true"));
-
       setUserDetail(response.data[0]);
+
+      navigate("/");
     } else {
-      toast.error("کاربری با این مشصات وجود ندارد!");
+      toast.error("!کاربری با این مشصات وجود ندارد");
     }
   };
 

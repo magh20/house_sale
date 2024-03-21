@@ -23,9 +23,11 @@ export const getPost = async (arg: any) => {
   }
 };
 
-export const getPosts = async () => {
+export const getPosts = async (arg: any) => {
   try {
-    const response: any = await header(`http://localhost:3000`).get(`/posts`);
+    const response: any = await header(`http://localhost:3000`).get(`/posts`, {
+      params: arg,
+    });
 
     return response;
   } catch (e) {
