@@ -18,7 +18,7 @@ const MainPage = () => {
     const response = await getPosts(obj);
 
     if (response.data?.length != 0) {
-      setData(response.data.data);
+      setData(response.data);
       setTotalPage(response.data.pages);
     } else {
       toast.error("!پستی وجود ندارد");
@@ -36,7 +36,7 @@ const MainPage = () => {
   return (
     <main className="w-full pt-[6%] px-5 h-screen flex flex-col">
       <section className=" w-full flex justify-between items-start flex-wrap h-auto lg:h-[530px]  ">
-        {data.map((item: any) => (
+        {data?.map((item: any) => (
           <PostCart item={item} />
         ))}
       </section>

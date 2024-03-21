@@ -2,20 +2,32 @@
   "users": [
     {
       "id": "1",
-      "username": "user1",
+      "email": "mm@gmail.com",
       "password": "password1",
       "phoneNumber": "09121111111"
     },
     {
       "id": "70cd",
       "phoneNumber": "09192222222",
-      "username": "magh",
+      "email": "mma@gmail.com",
       "password": "4321"
+    },
+    {
+      "email": "m@gmail.com",
+      "password": "$2a$10$.ONnuPGuHcg20A9uL.OkFuNHQ5aW.Y22OKu3kgtP1SksrtDM/V1ge",
+      "phoneNumber": "09121111111",
+      "id": "OCZehfT"
+    },
+    {
+      "email": "ma@gmail.com",
+      "password": "$2a$10$M1dfL.OWI0NH2gU/rH/CJe266/IV7LJfTkm4q1BR5Ezd6oMJdYX6G",
+      "phoneNumber": "09123333333",
+      "id": "OFE2s0d"
     }
   ],
   "posts": [
     {
-      "address": "Tehran",
+      "address": "تهران",
       "description": "Content of post 1",
       "coordinates": {
         "lat": 35.73703779932528,
@@ -172,6 +184,46 @@
       },
       "phoneNumber": "9192222222",
       "description": "..."
+    },
+    {
+      "address": "torkestan",
+      "coordinates": {
+        "lat": 35.6981528433334,
+        "lng": 51.436275309193405
+      },
+      "phoneNumber": "09123333333",
+      "description": ".,.,",
+      "id": "CX8Vzzg"
+    },
+    {
+      "address": "dgb",
+      "coordinates": {
+        "lat": 35.698013436605756,
+        "lng": 51.38013639513766
+      },
+      "phoneNumber": "09123333333",
+      "description": "xvx",
+      "id": "5AyZ4L9"
+    },
+    {
+      "address": "bcb",
+      "coordinates": {
+        "lat": 35.7,
+        "lng": 51.4
+      },
+      "phoneNumber": "09123333333",
+      "description": "cvb",
+      "id": "EaFxcnT"
+    },
+    {
+      "address": "jkkhb",
+      "coordinates": {
+        "lat": 35.6971769911219,
+        "lng": 51.42219766102043
+      },
+      "phoneNumber": "09123333333",
+      "description": "khb",
+      "id": "CJSygIq"
     }
   ]
 }

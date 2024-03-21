@@ -13,9 +13,10 @@ export function header(root: string) {
 
 export const userLogin = async (arg: any) => {
   try {
-    const response: any = await header(`http://localhost:3000`).get(`/users`, {
-      params: arg,
-    });
+    const response: any = await header(`http://localhost:3000`).post(
+      `/login`,
+      arg
+    );
 
     return response;
   } catch (e) {

@@ -6,19 +6,18 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/layout/Header";
 import { userLogin } from "../../services/auth";
 import { toast } from "react-toastify";
 import { myContext } from "../../context/context";
 
 interface FormData {
-  username: string;
+  email: string;
   password: string;
 }
 
 interface MyContextValue {
-  setAccess: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserDetail: React.Dispatch<React.SetStateAction<object>>;
+  setAccess: React.Dispatch<React.SetStateAction<string>>;
+  setUserDetail: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Login = () => {
@@ -29,7 +28,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
-    username: yup.string().required("please enter your username"),
+    email: yup.string().required("please enter your email"),
     password: yup.string().required("password is required!"),
     // .min(8, "Password must be at least 8 characters!")
   });
@@ -44,7 +43,7 @@ const Login = () => {
     setLoading(true);
 
     const obj = {
-      username: data.username,
+      email: data.email,
       password: data.password,
     };
 
@@ -55,9 +54,8 @@ const Login = () => {
     if (response.data?.length !== 0) {
       toast.success("خوش آمدید.");
 
-      setAccess(true);
-      localStorage.setItem("access", JSON.parse("true"));
-      setUserDetail(response.data[0]);
+      setAccess(response.data.accessToken);
+      setUserDetail(response.data.user);
 
       navigate("/");
     } else {
@@ -77,13 +75,13 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <input
-              type="text"
+              type="email"
               className="bg-white opacity-100 border border-1 border-rel-blue  w-[90%] h-[60px] max-sm:w-[85%] max-sm:h-[40px] mb-1 focus:outline-none pl-3 rounded-lg "
-              placeholder="Username"
-              {...register("username")}
+              placeholder="email"
+              {...register("email")}
             />
             <p className=" text-xs mb-1 font-dana text-red-700 z-50">
-              {errors.username?.message}
+              {errors.email?.message}
             </p>
 
             <input

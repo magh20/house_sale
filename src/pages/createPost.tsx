@@ -22,18 +22,18 @@ const CreatePost = () => {
 
   const { userDetail } = useContext(myContext) as MyContextValue;
 
-  const postCreate = () => {
+  const postCreate = async () => {
     setLoading(true);
 
-    if (address && des && position && userDetail?.phoneNumber) {
+    if (address && des && position && JSON.parse(userDetail)?.phoneNumber) {
       const obj = {
         address,
         coordinates: position,
-        phoneNumber: userDetail?.phoneNumber,
+        phoneNumber: JSON.parse(userDetail)?.phoneNumber,
         description: des,
       };
 
-      const response: any = postRegister(obj);
+      const response: any = await postRegister(obj);
 
       setLoading(false);
 
@@ -45,6 +45,7 @@ const CreatePost = () => {
       }
     } else {
       toast.error("لطفا اطلاعات را تکمیل کنید");
+      setLoading(false);
     }
   };
 

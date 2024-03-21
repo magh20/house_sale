@@ -11,14 +11,14 @@ import { myContext } from "../../context/context";
 import { userLogin, userRegister } from "../../services/auth";
 
 interface FormData {
-  username: string;
+  email: string;
   password: string;
   phoneNumber: string;
 }
 
 interface MyContextValue {
-  setAccess: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserDetail: React.Dispatch<React.SetStateAction<object>>;
+  setAccess: React.Dispatch<React.SetStateAction<string>>;
+  setUserDetail: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Register = () => {
@@ -32,16 +32,9 @@ const Register = () => {
     phoneNumber: yup
       .string()
       .min(11)
-      .required("please enter your phone number"),
-    username: yup
-      .string()
-      .required("please enter your username")
-      .matches(
-        /^[\u0621-\u0628\u062A-\u063A\u0641-\u0642\u0644-\u0648\u064E-\u0651\u0655\u067E\u0686\u0698\u0020\u2000-\u200F\u2028-\u202F\u06A9\u06AF\u06BE\u06CC\u0629\u0643\u0649-\u064B\u064D\u06D5\sa-zA-Z]+$/,
-        "Username is incorrect!"
-      ),
-    password: yup.string().required("password is required!"),
-    // .min(8, "Password must be at least 8 characters!")
+      .required("لطفا شماره تلفن خو را وارد نمایید"),
+    email: yup.string().required("لطفا ایمل خود را وارد نمایید"),
+    password: yup.string().required("وارد کردن گذرواژه الزامی است"),
   });
 
   const {
@@ -55,36 +48,23 @@ const Register = () => {
 
     const obj = {
       phoneNumber: data.phoneNumber.toString(),
-      username: data.username,
+      email: data.email,
       password: data.password,
     };
 
-    const objCheck = {
-      phoneNumber: data.phoneNumber.toString(),
-    };
+    const response: any = await userRegister(obj);
 
-    const res: any = await userLogin(objCheck);
+    setLoading(false);
 
-    if (res.data?.length != 0) {
-      toast.error("!این کاربر وجود دارد");
+    if (response) {
+      toast.success(".خوش آمدید");
 
-      setLoading(false);
+      setAccess(response.data.accessToken);
+      setUserDetail(response.data.user);
+
+      navigate("/");
     } else {
-      const response: any = await userRegister(obj);
-
-      setLoading(false);
-
-      if (response) {
-        toast.success(".خوش آمدید");
-
-        setAccess(true);
-        localStorage.setItem("access", JSON.parse("true"));
-        setUserDetail(response.data);
-
-        navigate("/");
-      } else {
-        toast.error("مشکلی پیش آمده است! لطفا دوباره تلاش کنید.");
-      }
+      toast.error("این کاربر وجود دارد");
     }
   };
 
@@ -110,13 +90,13 @@ const Register = () => {
             </p>
 
             <input
-              type="text"
+              type="email"
               className="bg-white opacity-100 border border-1 border-rel-blue  w-[90%] h-[60px] max-sm:w-[85%] max-sm:h-[40px] mb-1 focus:outline-none pl-3 rounded-lg "
-              placeholder="Username"
-              {...register("username")}
+              placeholder="email"
+              {...register("email")}
             />
             <p className=" text-xs mb-1 font-dana text-red-700 z-50">
-              {errors.username?.message}
+              {errors.email?.message}
             </p>
 
             <input
